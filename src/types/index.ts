@@ -27,4 +27,116 @@ export interface SearchFilters {
   };
   tags?: string[];
   author?: string;
+  department?: string;
+  query?: string;
+}
+
+// API Response Types
+export interface PaginationMeta {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+  hasNext: boolean;
+  hasPrev: boolean;
+}
+
+export interface ApiResponse<T> {
+  data: T;
+  meta?: PaginationMeta;
+  message?: string;
+  success: boolean;
+}
+
+export interface PaginatedResponse<T> extends ApiResponse<T[]> {
+  meta: PaginationMeta;
+}
+
+// Search Types
+export interface SearchQuery {
+  q?: string;
+  type?: ContentItem['type'];
+  tags?: string[];
+  author?: string;
+  department?: string;
+  dateFrom?: string;
+  dateTo?: string;
+  page?: number;
+  limit?: number;
+  sortBy?: 'createdAt' | 'updatedAt' | 'title' | 'relevance';
+  sortOrder?: 'asc' | 'desc';
+}
+
+export interface SearchResult {
+  item: ContentItem;
+  score: number;
+  highlights?: {
+    title?: string[];
+    content?: string[];
+    tags?: string[];
+  };
+}
+
+export interface SearchResponse extends PaginatedResponse<SearchResult> {
+  query: SearchQuery;
+  executionTime: number;
+}
+
+// User API Types
+export interface UserQuery {
+  department?: string;
+  page?: number;
+  limit?: number;
+  search?: string;
+  sortBy?: 'name' | 'email' | 'department';
+  sortOrder?: 'asc' | 'desc';
+}
+
+// Content API Types
+export interface ContentQuery {
+  type?: ContentItem['type'];
+  author?: string;
+  tags?: string[];
+  page?: number;
+  limit?: number;
+  dateFrom?: string;
+  dateTo?: string;
+  sortBy?: 'createdAt' | 'updatedAt' | 'title';
+  sortOrder?: 'asc' | 'desc';
+}
+
+// Error Types
+export interface ApiError {
+  message: string;
+  code: string;
+  details?: Record<string, any>;
+}
+
+export interface ValidationError extends ApiError {
+  field: string;
+  value: any;
+}
+
+// Department and Tag Types
+export type Department =
+  | 'Engineering'
+  | 'HR'
+  | 'Marketing'
+  | 'Finance'
+  | 'Operations'
+  | 'Design'
+  | 'Legal'
+  | 'Sales'
+  | 'Customer Success';
+
+export interface DepartmentInfo {
+  name: Department;
+  userCount: number;
+  contentCount: number;
+}
+
+export interface TagInfo {
+  name: string;
+  count: number;
+  category?: 'general' | 'department' | 'event' | 'policy';
 }
