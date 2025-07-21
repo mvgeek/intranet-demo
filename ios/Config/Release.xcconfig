@@ -1,0 +1,48 @@
+//
+// Release Configuration
+// This file contains release-specific build settings for App Store distribution
+//
+
+// Code Signing Settings for Release/Distribution
+CODE_SIGN_IDENTITY = iPhone Distribution
+CODE_SIGN_STYLE = Manual
+DEVELOPMENT_TEAM = YOUR_DEVELOPMENT_TEAM_ID
+
+// Bundle Identifier
+PRODUCT_BUNDLE_IDENTIFIER = com.vilnius.intranet
+
+// Provisioning Profile - Must be Distribution profile for App Store
+PROVISIONING_PROFILE_SPECIFIER = YOUR_DISTRIBUTION_PROVISIONING_PROFILE
+
+// Release Settings
+SWIFT_ACTIVE_COMPILATION_CONDITIONS = $(inherited)
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited)
+
+// Deployment Target
+IPHONEOS_DEPLOYMENT_TARGET = 15.0
+
+// Architecture - Only device architectures for release
+ARCHS = $(ARCHS_STANDARD)
+VALID_ARCHS = arm64 arm64e
+
+// Swift Settings
+SWIFT_VERSION = 5.0
+SWIFT_OPTIMIZATION_LEVEL = -O
+SWIFT_COMPILATION_MODE = wholemodule
+
+// Bitcode - Required for App Store
+ENABLE_BITCODE = YES
+
+// App Icon
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon
+
+// Strip Debug Symbols
+STRIP_INSTALLED_PRODUCT = YES
+SEPARATE_STRIP = YES
+STRIP_STYLE = debugging
+
+// Dead Code Elimination
+DEAD_CODE_STRIPPING = YES
+
+// Optimization
+GCC_OPTIMIZATION_LEVEL = s
